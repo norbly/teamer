@@ -1,5 +1,11 @@
 <ul>
     <li><a href="{$SCRIPT_NAME}?action=index">index</a></li>
+   {if $smarty.session.active == true}
+   <li><a href="{$SCRIPT_NAME}?action=dashboard">dashboard</a></li>
+    username: {$smarty.session.username}
+    <li><a href="{$SCRIPT_NAME}?action=logout">log out</a></li>
+    {else}
     <li><a href="{$SCRIPT_NAME}?action=register">register</a></li>
-    <li><a href="{$SCRIPT_NAME}?action=login">login</a></li>
+    <li><a href="{$SCRIPT_NAME}?action=login">log in</a></li>
+    {/if}
 </ul>

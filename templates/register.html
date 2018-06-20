@@ -1,8 +1,9 @@
 <h2>registration area</h2> 
+{$ERROR_REGISTER}
 <form action="{$SCRIPT_NAME}?action=register" method="POST">
-    username<input type="text" name="username" id="username"></br>
-    email<input type="text" name="email" id="email">{$email_error}</br>
-    password<input type="password" name="password_0" id="password_0"></br>
-    repeat password<input type="password" name="password_1" id="password_1"></br>
+    username<input type="text" name="username" id="username" value="{$USERNAME}">{$ERROR_USERNAME}</br>
+    email<input type="text" name="email" id="email"value="{$EMAIL}">{$ERROR_EMAIL}</br>
+    password<input type="password" name="password_0" id="password_0">{$ERROR_PASSWORD_0}</br>
+    repeat password<input type="password" name="password_1" id="password_1">{$ERROR_PASSWORD_1}</br>
     <input type="submit" value="register">
 </form>
