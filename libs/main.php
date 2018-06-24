@@ -10,7 +10,7 @@ class Main {
     function __construct() {
         
         $this->tpl = new Custom_Smarty; 
-        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->database);
+        $this->conn = new Connection;
     
        if ($this->conn->connect_error) {
             echo 'connection error:' . $this->conn->connect_error . '<br>';
