@@ -6,9 +6,10 @@ class Main {
     var $password = "passwort";
     var $database = "teamerdb";
     var $conn;
-
+ 
     function __construct() {
-        $this->tpl = new Eventbase_Smarty; 
+        
+        $this->tpl = new Custom_Smarty; 
         $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->database);
     
        if ($this->conn->connect_error) {

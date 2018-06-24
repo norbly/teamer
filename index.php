@@ -1,9 +1,8 @@
 <?php
 session_start();
-//define('GUESTBOOK_DIR', '/web/www.example.com/smarty/guestbook/');
-define('EVENTBASE_DIR', '/var/www/html/teamer');
-require('/var/www/html/teamer/libs/setup.php');
 
+define('HOME_DIR', '/var/www/html/teamer/');
+require(HOME_DIR .'libs/setup.php');
 
 $m = new Main;
 $action = $_REQUEST['action'] ? $_REQUEST['action'] : 'index';
