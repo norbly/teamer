@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32, created on 2018-06-20 14:12:53
+/* Smarty version 3.1.32, created on 2018-06-24 21:38:28
   from '/var/www/html/teamer/templates/register.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32',
-  'unifunc' => 'content_5b2a44c5d53a38_81648489',
+  'unifunc' => 'content_5b2ff3340ded49_45955397',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2509e6115d15a4fc02f8479f7cba2772a2ee2d7f' => 
     array (
       0 => '/var/www/html/teamer/templates/register.html',
-      1 => 1529496769,
+      1 => 1529869105,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2a44c5d53a38_81648489 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2ff3340ded49_45955397 (Smarty_Internal_Template $_smarty_tpl) {
 ?><h2>registration area</h2> 
 <?php echo $_smarty_tpl->tpl_vars['ERROR_REGISTER']->value;?>
 
@@ -29,7 +29,7 @@ function content_5b2a44c5d53a38_81648489 (Smarty_Internal_Template $_smarty_tpl)
     username<input type="text" name="username" id="username" value="<?php echo $_smarty_tpl->tpl_vars['USERNAME']->value;?>
 "><?php echo $_smarty_tpl->tpl_vars['ERROR_USERNAME']->value;?>
 </br>
-    email<input type="text" name="email" id="email"value="<?php echo $_smarty_tpl->tpl_vars['EMAIL']->value;?>
+    email<input type="text" name="email" id="email"value="<?php echo $_POST['email'];?>
 "><?php echo $_smarty_tpl->tpl_vars['ERROR_EMAIL']->value;?>
 </br>
     password<input type="password" name="password_0" id="password_0"><?php echo $_smarty_tpl->tpl_vars['ERROR_PASSWORD_0']->value;?>

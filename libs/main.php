@@ -1,10 +1,6 @@
 <?php
 class Main {
     var $tpl = null;
-    var $servername = "localhost";
-    var $username = "root";
-    var $password = "passwort";
-    var $database = "teamerdb";
     var $conn;
  
     function __construct() {
@@ -89,9 +85,6 @@ class Main {
             $_SESSION['id'] = $user['id'];   
             $_SESSION['email'] = $email;
            header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard");
-           } else {
-               $this->tpl->assign('USERNAME', $username);
-               $this->tpl->assign('EMAIL', $email);
            }
         }
     }
