@@ -1,7 +1,7 @@
 <h2>log in</h2> 
 {$ERROR_LOGIN}
 <form action="{$SCRIPT_NAME}?action=login" method="POST">
-    email<input type="text" name="email" id="email">{$email_error}</br>
+    email<input type="text" name="email" id="email" value="{$smarty.post.email}">{$email_error}</br>
     password<input type="password" name="password" id="password"></br>
     <input type="submit" value="log in">
 </form>
