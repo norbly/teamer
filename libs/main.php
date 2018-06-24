@@ -82,7 +82,7 @@ class Main {
            $stmt->execute();
 
            $sql = 'SELECT id FROM users WHERE email = "' . $email .'" ';
-           $result = $this->tpl->query($sql);
+           $result = $this->conn->query($sql);
            $user = $result->fetch_assoc();
            $_SESSION['active'] = true;
            $_SESSION['username'] = $username;
