@@ -1,4 +1,5 @@
-<h2>log in</h2> 
+<h2>log in</h2>
+{$smarty.get.error}  
 {$ERROR_LOGIN}
 <form action="{$SCRIPT_NAME}?action=login" method="POST">
     email<input type="text" name="email" id="email" value="{$smarty.post.email}">{$email_error}</br>

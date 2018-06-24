@@ -1,8 +1,10 @@
 <?php
 class Main {
+    
     var $tpl = null;
     var $conn;
- 
+    var $page_title = 'teamer';
+
     function __construct() {
         
         $this->tpl = new Custom_Smarty; 
@@ -11,15 +13,19 @@ class Main {
        if ($this->conn->connect_error) {
             echo 'connection error:' . $this->conn->connect_error . '<br>';
         }
+
     }
 
     function load_doc($action) {
+        $this->tpl->assign('PAGE_TITLE',$this->page_title);
         $this->tpl->assign('TEMPLATE',$action);  
         $this->tpl->display('main.html');
     }
   
     function register($input = array()) {
         
+        $this->page_title = 'teamer - create account';
+
         if (isset($_POST['username']) || isset($_POST['email']) || isset($_POST['passwort_0']) || isset($_POST['passwort_1'])) {
             $error = false;
             // check username for validity
@@ -57,10 +63,8 @@ class Main {
             $this->tpl->assign('ERROR_PASSWORD_1', 'err_passwords_not_equal');
            }
            $password_0 = password_hash($password_0, PASSWORD_BCRYPT);
-           
 
-           
-                // check if user exists
+            // check if user exists
             $sql = "SELECT username, email FROM users WHERE email='" . $email . "' OR username = '" . $username ."'";
             $result = $this->conn->query($sql);
             if ($result->num_rows > 0) {
@@ -68,11 +72,9 @@ class Main {
                 $this->tpl->assign('ERROR_REGISTER', 'err_user_exists');
             } 
            
-           
-
+            // if no error, add user to database and redirect to dashboard
            if (!$error) {  
             $verification = rand(111111, 999999);
-           // execute the sql query
            $stmt = $this->conn->prepare('INSERT INTO users (username, email, password, verification) VALUES (?,?,?,?)');
            $stmt->bind_param('sssi',$username,$email, $password_0, $verification);
            $stmt->execute();
@@ -89,8 +91,8 @@ class Main {
         }
     }
 
-    
     function login($input = array()) {
+        $this->page_title = 'teamer - login';
         $error = false;
         if (isset($_POST['email']) || isset($_POST['password'])) {
             $email = $this->conn->escape_string($input['email']);
@@ -128,11 +130,16 @@ class Main {
 
     function logout() {
         session_unset();
-        session_destroy();
+        session_destroy();  
+        header("location: " . $_SERVER['PHP_SELF'] . "?action=index&message=logout_successful");
     }
 
     function dashboard() {
         
+         if (!isset($_SESSION['active']) OR $_SESSION['active'] === false) { 
+            header("location: " . $_SERVER['PHP_SELF'] . "?action=login&error=err_login_to_view_page");
+         }
+        $this->page_title = 'teamer - dashboard ';
     }
 }
 ?> 

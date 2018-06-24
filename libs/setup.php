@@ -7,5 +7,4 @@ require(HOME_DIR . 'libs/custom_smarty.class.php');
 require(HOME_DIR . 'libs/connection.class.php');
 // include main class
 require(HOME_DIR . 'libs/main.php');
-
 ?>

@@ -18,6 +18,7 @@ case 'login' :
     break;
 
 case 'register' :
+    $m->page_title = 'teamer - register';
     $m->register($_POST);
     $m->load_doc('register.html'); 
     break;
@@ -29,6 +30,8 @@ case 'dashboard' :
     $m->dashboard();
     $m->load_doc('dashboard.html');
     break;
+case 'error' :
+    $m->load_doc('error.html');
+    break;
 } 
- 
 ?>
