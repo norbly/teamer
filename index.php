@@ -33,5 +33,8 @@ case 'dashboard' :
 case 'error' :
     $m->load_doc('error.html');
     break;
+case 'add_event' :
+    $m->add_event($_POST);
+    $m->load_doc('add_event.html');
 } 
 ?>

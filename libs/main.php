@@ -141,5 +141,44 @@ class Main {
          }
         $this->page_title = 'teamer - dashboard ';
     }
+
+    function add_event($input = array()) {
+        $this->page_title = 'teamer - add event';
+        // check if user has submitted the form
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ 
+            // check if user is logged in
+            if (!isset($_SESSION['active']) || $_SESSION['active'] === false) {
+                header("location: " . $_SERVER['PHP_SELF'] . "?action=login&error=err_login_to_add_event");
+                return;
+            }
+
+            require(HOME_DIR . 'libs/event.class.php');
+            $event = new event;
+
+            // check if title is empty
+            if (empty($input['title'])) {
+                $this->tpl->assign('ERROR_TITLE', 'err_title_empty');
+                return;
+            }
+            $event->title = $input['title'];
+            
+            // check description
+            if (empty($input['description'])) {
+                $this->tpl->assign('ERROR_DESCRIPTION', 'err_description_empty');
+                return;
+            }
+            $event->description = $input['description'];
+
+            $event->start_date = date('Y-m-d', mktime($input['start_date']));
+            $event->start_time = date('h:i', mktime($input['start_time']));
+            $event->insert_into_db();
+            header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard");
+             
+        }
+        
+        
+    }
 }
 ?> 
