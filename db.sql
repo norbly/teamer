@@ -28,3 +28,7 @@ CREATE TABLE events (
 /* default values */
 INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('b','b@b.b','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759); /*password = 12345678*/
 INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('norbly','norbly@protonmail.com','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759) /*password = 12345678*/
+INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
+                    fixed_location, limited_number_of_participants, number_of_participants, advance_reservation_required, confirm_reservations)
+                   VALUES (1, "Zeichnen mit Aquarell", "Wenn du Lust hast, gemeinsam zu Zeichnen, dann komm! Ich schlage vor irgendwo in die Natur zu gehen, da gibts schöne Gegenstände zum abzeichnen", "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0,0);
+                   

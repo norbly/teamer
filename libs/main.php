@@ -189,11 +189,20 @@ class Main {
             $event->confirm_reservations = isset($input['advance_reservation_required']) && isset($input['confirm_reservations']) ? 1 : 0;
 
             $event->insert_into_db();
-            header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard&message=event_successfully_created");
-             
-        }
-        
-        
+            header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard&message=event_successfully_created");    
+        }    
+    }
+
+   function show_event() {
+    $this->page_title = 'teamer - event';
+    
+     require(HOME_DIR . 'libs/event.class.php');
+    $event = new event;
+    if(!isset($_REQUEST['id'])) {
+        return;
+    }
+        $array = $event->get_event_by_id($_REQUEST['id']);
+        $this->tpl->assign('EVENT', $array);
     }
 }
 ?> 

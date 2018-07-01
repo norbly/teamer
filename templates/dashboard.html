@@ -7,14 +7,16 @@ id: {$smarty.session.user_id}
     <button id="more">more</button>
 </div>
 
-<template>
-    
+<template> 
+    <a>  
     <h3></h3>
     <span id="start_date"></span>
+</a> 
     <hr>   
 </template>
 
 <script>
+    // event listeners
     window.addEventListener("load", function() {
         ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
         offset += 5;
@@ -24,30 +26,29 @@ id: {$smarty.session.user_id}
         ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
         offset += 5;
     });
+    // callback functions
+
+    // display events in the div boxes_own_event
     function load_events(xhttp) {
         var events = JSON.parse(xhttp.responseText);
         var boxes_own_events = document.getElementById("boxes_own_events");
         var event_template = document.querySelectorAll("template")[0];
-        
-
-events.forEach(element => {
-    var clon = event_template.content.cloneNode(true);
-    clon.querySelectorAll("h3")[0].innerHTML = element.event_title;
-    clon.getElementById('start_date').innerHTML = element.start_date;
-    boxes_own_events.appendChild(clon);
-});
-
-        
-         
+        events.forEach(element => {
+            var clon = event_template.content.cloneNode(true);
+            clon.querySelectorAll("a")[0].href = "index.php?action=event&id="+element.event_id;
+            clon.querySelectorAll("h3")[0].innerHTML = element.event_title;
+            clon.getElementById('start_date').innerHTML = element.start_date;
+             boxes_own_events.appendChild(clon);
+        });  
     }
 
+    // AJAX request function
     function ajax_request(url, callback_function) {
         var xhttp = new XMLHttpRequest;
         xhttp.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200) {
                 callback_function(this);
             }
-            
         }
         xhttp.open("GET", url);
         xhttp.send();

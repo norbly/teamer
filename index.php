@@ -36,5 +36,13 @@ case 'error' :
 case 'add_event' :
     $m->add_event($_POST);
     $m->load_doc('add_event.html');
+    break;
+case 'event' :
+    $m->show_event();
+    $m->load_doc('event.html');
+    break;
+default : 
+    $m->load_doc('index.html');
+    break;
 } 
 ?>

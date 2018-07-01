@@ -1,0 +1,21 @@
+<h1>event view</h1>
+{if $smarty.session.user_id == $EVENT.creator_id}
+<a href="#">edit event</a>
+{/if}
+
+<h2>{$EVENT.event_title}</h2>
+<div>von {$EVENT.creator_id}</div>
+<div>{$EVENT.start_date} {$EVENT.start_time}</div>
+<div>{$EVENT.event_description}</div>
+{if $EVENT.advance_reservation_required == true}
+<a href="">anmelden</a>
+{if $EVENT.confirm_reservations == true}
+<div>Anmeldungen müssen akzeptiert werden</div> 
+{/if}
+{/if}
+{if $EVENT.limited_number_of_participants == true}
+<div>Teilnehmer: {$EVENT.number_of_participants} von 'in Arbeit'</div>
+{else}
+<div>keine Teilnehmerbegrenzung </div>
+{/if}
+

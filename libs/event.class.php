@@ -30,5 +30,23 @@ class event {
         $stmt->bind_param('issssssiiiii',$this->creator_id, $this->title, $this->description, $current_date, $current_time, $this->start_date, $this->start_time, $this->fixed_location,$this->limited_number_of_participants, $this->number_of_participants, $this->advance_reservation_required, $this->confirm_reservations);        
         $stmt->execute();
     }
+
+    
+    function get_event_by_id($id) {
+
+        $sql = 'SELECT creator_id FROM events WHERE event_id = ' . $id .';';
+        $result = $this->con->query($sql);
+        $result = $result->fetch_assoc();
+        // if active user is creator of the event, return all information about the event
+        if ($result['creator_id'] == $_SESSION['user_id']) {
+            $sql = 'SELECT * FROM events WHERE event_id = ' . $id .';';
+        } else {
+            $sql = 'SELECT creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,".
+        " fixed_location, limited_number_of_participants, number_of_participants, advance_reservation_required, confirm_reservations FROM events WHERE event_id = ' . $id .';';
+        }
+        $result = $this->con->query($sql);
+        return $result->fetch_assoc();
+    }
+
 }
 ?>
