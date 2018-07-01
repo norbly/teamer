@@ -84,7 +84,7 @@ class Main {
            $user = $result->fetch_assoc();
            $_SESSION['active'] = true;
            $_SESSION['username'] = $username;
-            $_SESSION['id'] = $user['id'];   
+            $_SESSION['user_id'] = $user['id'];   
             $_SESSION['email'] = $email;
            header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard");
            }
@@ -117,7 +117,7 @@ class Main {
             $password_input = $this->conn->escape_string($input['password']);           
             if (password_verify( $password_input, $user['password'])) {
                 $_SESSION['active'] = true;
-                $_SESSION['id'] = $user['id'];
+                $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
                 header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard");
@@ -153,10 +153,11 @@ class Main {
                 header("location: " . $_SERVER['PHP_SELF'] . "?action=login&error=err_login_to_add_event");
                 return;
             }
-
+            
             require(HOME_DIR . 'libs/event.class.php');
             $event = new event;
 
+            $event->creator_id = $_SESSION['user_id'];
             // check if title is empty
             if (empty($input['title'])) {
                 $this->tpl->assign('ERROR_TITLE', 'err_title_empty');
@@ -171,10 +172,24 @@ class Main {
             }
             $event->description = $input['description'];
 
+            // check date
+            $event->fixed_date = isset($input['fixed_date']) ? 1 : 0;
             $event->start_date = date('Y-m-d', mktime($input['start_date']));
             $event->start_time = date('h:i', mktime($input['start_time']));
+
+            // check location
+            $event->fixed_location = isset($input['fixed_location']) ? 1 : 0;;
+            
+            // handle number of participants
+            $event->limited_number_of_participants = isset($input['limited_number_of_participants']) ? 1 : 0;
+            $event->number_of_participants = $input['number_of_participants'];
+            
+            // handle reservations
+            $event->advance_reservation_required = isset($input['advance_reservation_required']) ? 1 : 0;                
+            $event->confirm_reservations = isset($input['advance_reservation_required']) && isset($input['confirm_reservations']) ? 1 : 0;
+
             $event->insert_into_db();
-            header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard");
+            header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard&message=event_successfully_created");
              
         }
         

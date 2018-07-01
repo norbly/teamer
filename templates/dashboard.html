@@ -1,2 +1,56 @@
+{$smarty.get.message}
 welcome back {$smarty.session.username}
-id: {$smarty.session.id}
+id: {$smarty.session.user_id}
+<div id="own_events" style="margin-left: 50px;width:200px">
+    <h2>own events</h2>
+    <div id="boxes_own_events"></div>
+    <button id="more">more</button>
+</div>
+
+<template>
+    
+    <h3></h3>
+    <span id="start_date"></span>
+    <hr>   
+</template>
+
+<script>
+    window.addEventListener("load", function() {
+        ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
+        offset += 5;
+    });
+     var offset = 0;
+    document.getElementById("more").addEventListener("click", function() { 
+        ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
+        offset += 5;
+    });
+    function load_events(xhttp) {
+        var events = JSON.parse(xhttp.responseText);
+        var boxes_own_events = document.getElementById("boxes_own_events");
+        var event_template = document.querySelectorAll("template")[0];
+        
+
+events.forEach(element => {
+    var clon = event_template.content.cloneNode(true);
+    clon.querySelectorAll("h3")[0].innerHTML = element.event_title;
+    clon.getElementById('start_date').innerHTML = element.start_date;
+    boxes_own_events.appendChild(clon);
+});
+
+        
+         
+    }
+
+    function ajax_request(url, callback_function) {
+        var xhttp = new XMLHttpRequest;
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                callback_function(this);
+            }
+            
+        }
+        xhttp.open("GET", url);
+        xhttp.send();
+    }
+    
+</script>

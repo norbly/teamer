@@ -1,8 +1,15 @@
 <h1>add a new event</h1>
 <form action="{$SCRIPT_NAME}?action=add_event" method="post">
-    title: <input type="text" name="title" id="title">{$ERROR_TITLE}</br>
+   <label for="title">title</label><input type="text" name="title" id="title">{$ERROR_TITLE}</br>
     description: </br><textarea name="description" id="description" cols="30" rows="10"></textarea>{$ERROR_DESCRIPTION}</br>
+    <input type="checkbox" name="fixed_date" id=""checked> <label for="fixed_date">fixes Datum</label></br>
     <input type="date" name="starte_date" id="">
     <input type="time" name="start_time" id=""></br>
+    <input type="checkbox" name="fixed_location" id="" checked>fixer Ort </br>
+    <input type="checkbox" name="limited_number_of_participants" id="" value="1">begrenzte Teilnehmeranzahl</br>
+    number_of_participants:<input type="number" name="number_of_participants" id=""></br>
+    <input type="checkbox" name="advance_reservation_required" id="">advance_reservation_required</br>
+    <input type="checkbox" name="confirm_reservations" id="" >confirm_reservations</br>
     <input type="submit" value="create event"> 
+    
 </form>
