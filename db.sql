@@ -10,7 +10,7 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS events;
 CREATE TABLE events (
     event_id INT PRIMARY KEY AUTO_INCREMENT,
-    creator_id INT,
+    creator_id INT REFERENCES users(id),
     event_title VARCHAR(64) NOT NULL,
     event_description VARCHAR(500),
     fixed_date BOOLEAN,
@@ -20,14 +20,20 @@ CREATE TABLE events (
     start_time TIME,
     fixed_location BOOLEAN,
     limited_number_of_participants BOOLEAN,
-    number_of_participants INT,
+    max_number_of_participants INT,
     advance_reservation_required BOOLEAN,
-    confirm_reservations BOOLEAN 
+    confirm_reservations BOOLEAN
+);
+DROP TABLE IF EXISTS user_participates_at_event;
+CREATE TABLE user_participates_at_event (
+    event_id INT REFERENCES events(event_id),
+    user_id INT REFERENCES users(id),
+    CONSTRAINT user_participates_at_event_PK PRIMARY KEY (event_id, user_id)
 );
 
 /* default values */
 INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('b','b@b.b','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759); /*password = 12345678*/
-INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('norbly','norbly@protonmail.com','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759) /*password = 12345678*/
+INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('norbly','norbly@protonmail.com','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759); /*password = 12345678*/
 INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
                     fixed_location, limited_number_of_participants, number_of_participants, advance_reservation_required, confirm_reservations)
                    VALUES (1, "Zeichnen mit Aquarell", "Wenn du Lust hast, gemeinsam zu Zeichnen, dann komm! Ich schlage vor irgendwo in die Natur zu gehen, da gibts schöne Gegenstände zum abzeichnen", "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0,0);

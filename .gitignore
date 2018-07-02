@@ -1,1 +1,4 @@
-templates_c/
+*.html.php
+*.file.*.html.php
+*.php.php
+templates_c/*

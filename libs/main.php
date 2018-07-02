@@ -182,7 +182,7 @@ class Main {
             
             // handle number of participants
             $event->limited_number_of_participants = isset($input['limited_number_of_participants']) ? 1 : 0;
-            $event->number_of_participants = $input['number_of_participants'];
+            $event->max_number_of_participants = $input['max_number_of_participants'];
             
             // handle reservations
             $event->advance_reservation_required = isset($input['advance_reservation_required']) ? 1 : 0;                
