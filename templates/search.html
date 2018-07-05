@@ -20,18 +20,20 @@
     <hr>   
 </template>
 
+<script src="./templates/ajax.js"></script>
+
 <script>
     
     
     var offset = 0;
     // event listeners
     window.addEventListener("load", function() {
-        ajax_request("./libs/get_search_results.php?offset=" + offset,load_events);
+        ajax_request("./ajax.php?action=search_results&offset=" + offset,load_events);
         offset += 5;
      });
      
     document.getElementById("more").addEventListener("click", function() { 
-        ajax_request("./libs/get_search_results.php?offset=" + offset,load_events);
+        ajax_request("./ajax.php?action=search_results&offset=" + offset,load_events);
         offset += 5;
     });
     // callback functions
@@ -50,15 +52,5 @@
         });  
     }
 
-    // AJAX request function
-    function ajax_request(url, callback_function) {
-        var xhttp = new XMLHttpRequest;
-        xhttp.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                callback_function(this);
-            }
-        }
-        xhttp.open("GET", url);
-        xhttp.send();
-    }
+    
 </script>

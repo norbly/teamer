@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32, created on 2018-07-05 14:56:37
+/* Smarty version 3.1.32, created on 2018-07-05 16:56:13
   from '/var/www/html/teamer/templates/dashboard.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32',
-  'unifunc' => 'content_5b3e1585a4ee49_16924072',
+  'unifunc' => 'content_5b3e318deff834_74475370',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '99e1c69e0c5bfc87a393ba73b46099c7e00cff73' => 
     array (
       0 => '/var/www/html/teamer/templates/dashboard.html',
-      1 => 1530794467,
+      1 => 1530802571,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b3e1585a4ee49_16924072 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b3e318deff834_74475370 (Smarty_Internal_Template $_smarty_tpl) {
 echo $_GET['message'];?>
 
 welcome back <?php echo $_SESSION['username'];?>
@@ -34,26 +34,37 @@ id: <?php echo $_SESSION['user_id'];?>
 </div>
 
 <template> 
-    <a>  
-    <h3></h3>
-    <span id="start_date"></span>
-</a> 
+    <a>
+        <div>
+           <h3></h3>
+            <span id="start_date"></span> 
+        </div>      
+    </a> 
     <hr>   
 </template>
 
 <?php echo '<script'; ?>
+ src="./templates/ajax.js"><?php echo '</script'; ?>
 >
+
+<?php echo '<script'; ?>
+>
+    var do_ajax_request = (function() {
+        var offset = 0;
+        return function() {
+            ajax_request("./libs/get_own_events.php?user_id=<?php echo $_SESSION['user_id'];?>
+&offset=" + offset,load_events);
+            offset += 5;
+        };
+    })();
+
     // event listeners
     window.addEventListener("load", function() {
-        ajax_request("./libs/get_own_events.php?user_id=<?php echo $_SESSION['user_id'];?>
-&offset=" + offset,load_events);
-        offset += 5;
+        do_ajax_request();
     });
-     var offset = 0;
+     
     document.getElementById("more").addEventListener("click", function() { 
-        ajax_request("./libs/get_own_events.php?user_id=<?php echo $_SESSION['user_id'];?>
-&offset=" + offset,load_events);
-        offset += 5;
+        do_ajax_request();
     });
     // callback functions
 
@@ -71,17 +82,6 @@ id: <?php echo $_SESSION['user_id'];?>
         });  
     }
 
-    // AJAX request function
-    function ajax_request(url, callback_function) {
-        var xhttp = new XMLHttpRequest;
-        xhttp.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                callback_function(this);
-            }
-        }
-        xhttp.open("GET", url);
-        xhttp.send();
-    }
     
 <?php echo '</script'; ?>
 ><?php }

@@ -8,23 +8,33 @@ id: {$smarty.session.user_id}
 </div>
 
 <template> 
-    <a>  
-    <h3></h3>
-    <span id="start_date"></span>
-</a> 
+    <a>
+        <div>
+           <h3></h3>
+            <span id="start_date"></span> 
+        </div>      
+    </a> 
     <hr>   
 </template>
 
+<script src="./templates/ajax.js"></script>
+
 <script>
+    var do_ajax_request = (function() {
+        var offset = 0;
+        return function() {
+            ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
+            offset += 5;
+        };
+    })();
+
     // event listeners
     window.addEventListener("load", function() {
-        ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
-        offset += 5;
+        do_ajax_request();
     });
-     var offset = 0;
+     
     document.getElementById("more").addEventListener("click", function() { 
-        ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
-        offset += 5;
+        do_ajax_request();
     });
     // callback functions
 
@@ -42,16 +52,5 @@ id: {$smarty.session.user_id}
         });  
     }
 
-    // AJAX request function
-    function ajax_request(url, callback_function) {
-        var xhttp = new XMLHttpRequest;
-        xhttp.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                callback_function(this);
-            }
-        }
-        xhttp.open("GET", url);
-        xhttp.send();
-    }
     
 </script>
