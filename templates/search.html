@@ -1,0 +1,64 @@
+<h1>search</h1>
+<form action="{$SCRIPT_NAME}" method="get">
+    <input type="text" name="action" value="search" style="display:none">
+    <div>
+        <input type="text" name="q" id="q">
+    </div>
+    <input type="submit" value="search">
+</form>
+
+<div id="events" style="width:200px">
+    <div id="box_events"></div>
+    <button id="more">more</button>
+</div>
+
+<template> 
+    <a>  
+    <h3></h3>
+    <span id="start_date"></span>
+</a> 
+    <hr>   
+</template>
+
+<script>
+    
+    
+    var offset = 0;
+    // event listeners
+    window.addEventListener("load", function() {
+        ajax_request("./libs/get_search_results.php?offset=" + offset,load_events);
+        offset += 5;
+     });
+     
+    document.getElementById("more").addEventListener("click", function() { 
+        ajax_request("./libs/get_search_results.php?offset=" + offset,load_events);
+        offset += 5;
+    });
+    // callback functions
+
+    // display events in the div boxes_own_event
+    function load_events(xhttp) {
+        var events = JSON.parse(xhttp.responseText);
+        var box_events = document.getElementById("box_events");
+        var event_template = document.querySelectorAll("template")[0];
+        events.forEach(element => {
+            var clon = event_template.content.cloneNode(true);
+            clon.querySelectorAll("a")[0].href = "index.php?action=event&id="+element.event_id;
+            clon.querySelectorAll("h3")[0].innerHTML = element.event_title;
+            clon.getElementById('start_date').innerHTML = element.start_date;
+             box_events.appendChild(clon);
+        });  
+    }
+
+    // AJAX request function
+    function ajax_request(url, callback_function) {
+        var xhttp = new XMLHttpRequest;
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                callback_function(this);
+            }
+        }
+        xhttp.open("GET", url);
+        xhttp.send();
+    }
+</script>

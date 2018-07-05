@@ -39,10 +39,12 @@ class event {
         $result = $result->fetch_assoc();
         // if active user is creator of the event, return all information about the event
         if ($result['creator_id'] == $_SESSION['user_id']) {
-            $sql = 'SELECT * FROM events WHERE event_id = ' . $id .';';
+            $sql = 'SELECT creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,".
+        " fixed_location, limited_number_of_participants, advance_reservation_required, confirm_reservations FROM events WHERE event_id = ' . $id .';';
+            
         } else {
             $sql = 'SELECT creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,".
-        " fixed_location, limited_number_of_participants, number_of_participants, advance_reservation_required, confirm_reservations FROM events WHERE event_id = ' . $id .';';
+        " fixed_location, limited_number_of_participants, advance_reservation_required, confirm_reservations FROM events WHERE event_id = ' . $id .';';
         }
         $result = $this->con->query($sql);
         return $result->fetch_assoc();

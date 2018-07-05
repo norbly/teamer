@@ -11,11 +11,6 @@ while($row = $result->fetch_assoc()) {
     $output[] = $row;
 }
 
-$events = array(
-    array("event_title"=>"baden"),
-    array("event_title"=>"tennis"),
-    array("event_title"=>"schwimmen")
-);
 echo json_encode($output);
 ?>
 

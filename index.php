@@ -41,6 +41,10 @@ case 'event' :
     $m->show_event();
     $m->load_doc('event.html');
     break;
+case 'search' :
+    $m->search();
+    $m->load_doc('search.html');
+    break;
 default : 
     $m->load_doc('index.html');
     break;

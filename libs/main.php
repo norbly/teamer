@@ -202,7 +202,17 @@ class Main {
         return;
     }
         $array = $event->get_event_by_id($_REQUEST['id']);
-        $this->tpl->assign('EVENT', $array);
+    $this->tpl->assign('EVENT', $array);
+
+    }
+
+    function search() {
+        if (isset($_REQUEST['q'])) {
+            /*
+            include(HOME_DIR . 'libs/search.class.php');
+            $_SESSION['search'] = new Search;
+            $_SESSION['search']->get_search_results();*/
+        }   
     }
 }
 ?> 

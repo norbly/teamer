@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32, created on 2018-07-01 16:59:00
+/* Smarty version 3.1.32, created on 2018-07-05 14:56:37
   from '/var/www/html/teamer/templates/dashboard.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32',
-  'unifunc' => 'content_5b38ec344c64b8_47747959',
+  'unifunc' => 'content_5b3e1585a4ee49_16924072',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '99e1c69e0c5bfc87a393ba73b46099c7e00cff73' => 
     array (
       0 => '/var/www/html/teamer/templates/dashboard.html',
-      1 => 1530457138,
+      1 => 1530794467,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b38ec344c64b8_47747959 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b3e1585a4ee49_16924072 (Smarty_Internal_Template $_smarty_tpl) {
 echo $_GET['message'];?>
 
 welcome back <?php echo $_SESSION['username'];?>

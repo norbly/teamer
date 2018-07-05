@@ -12,7 +12,7 @@ CREATE TABLE events (
     event_id INT PRIMARY KEY AUTO_INCREMENT,
     creator_id INT REFERENCES users(id),
     event_title VARCHAR(64) NOT NULL,
-    event_description VARCHAR(500),
+    event_description VARCHAR(1000),
     fixed_date BOOLEAN,
     creation_date DATE,
     creation_time TIME,
@@ -33,8 +33,41 @@ CREATE TABLE user_participates_at_event (
 
 /* default values */
 INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('b','b@b.b','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759); /*password = 12345678*/
+INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('Bjarne','bjarne.kopplin@gmail.com','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759); /*password = 12345678*/
 INSERT INTO `users`(`username`, `email`, `password`, `verification`) VALUES ('norbly','norbly@protonmail.com','$2y$10$RlpOY0hdA4UbOmKZ23AWz..vh9QDio3qVKdg8KE.Yu1vxRxgdOy2W',342759); /*password = 12345678*/
 INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
-                    fixed_location, limited_number_of_participants, number_of_participants, advance_reservation_required, confirm_reservations)
-                   VALUES (1, "Zeichnen mit Aquarell", "Wenn du Lust hast, gemeinsam zu Zeichnen, dann komm! Ich schlage vor irgendwo in die Natur zu gehen, da gibts schöne Gegenstände zum abzeichnen", "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0,0);
+                    fixed_location, limited_number_of_participants, 
+                    advance_reservation_required, confirm_reservations)
+                   VALUES (1, "Zeichnen mit Aquarell", "Wenn du Lust hast, gemeinsam zu Zeichnen, dann komm! Ich schlage vor irgendwo in die Natur zu gehen, da gibts schöne Gegenstände zum abzeichnen",
+                    "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0);
+INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
+                    fixed_location, limited_number_of_participants, 
+                    advance_reservation_required, confirm_reservations)
+                   VALUES (1,"esse molestie consequat", "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. ",
+                    "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0);
+INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
+                    fixed_location, limited_number_of_participants, 
+                    advance_reservation_required, confirm_reservations)
+                   VALUES (1, "suscipit lobortis nisl ut ", "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
+                    "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0);
+INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
+                    fixed_location, limited_number_of_participants, 
+                    advance_reservation_required, confirm_reservations)
+                   VALUES (1, "vel illum", "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. ",
+                    "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0);
+INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
+                    fixed_location, limited_number_of_participants, 
+                    advance_reservation_required, confirm_reservations)
+                   VALUES (1, "132 dolore magna ", "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. ",
+                    "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0);
+INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
+                    fixed_location, limited_number_of_participants, 
+                    advance_reservation_required, confirm_reservations)
+                   VALUES (1, "Demo gegen Pflanzenfresser", "ich habe es satt (man beachte das Wortspiel), dass Menschen ohne Grund unschuldige Pflanzen töten. Hild mit, damit muss schluss sein. Eine andere Lösung anstelle von Pflanzen ist es, dass wir anfangen zu lernen, Photosynthese zu betreiben",
+                    "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0);
+INSERT INTO events (creator_id, event_title, event_description, creation_date, creation_time, start_date, start_time,
+                    fixed_location, limited_number_of_participants, 
+                    advance_reservation_required, confirm_reservations)
+                   VALUES (1, "Kanutour Warnow", "\/Hallo\/ ich suche noch ein paar Leute, die Lust haben, am Montag eine Kanutour zu machen",
+                    "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,0,0,0);                                                                                                    
                    
