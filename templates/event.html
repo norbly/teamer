@@ -12,10 +12,17 @@
 {if $EVENT.confirm_reservations == true}
 <div>Anmeldungen müssen erst akzeptiert werden</div> 
 {/if}
+{else}
+<div>Anmeldung nicht erforderlich</div>
 {/if}
 {if $EVENT.limited_number_of_participants == true}
-<div>Teilnehmer: {$EVENT.number_of_participants} von {$EVENT.max_number_of_participants}</div>
+<div>Teilnehmer:  von {$EVENT.max_number_of_participants}</div>
 {else}
 <div>keine Teilnehmerbegrenzung </div>
 {/if}
+
+{foreach from=$LABEL key=key item=label}
+<div>{$label.label_name}</div>
+{/foreach}
+
 

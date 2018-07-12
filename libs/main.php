@@ -195,14 +195,19 @@ class Main {
 
    function show_event() {
     $this->page_title = 'teamer - event';
-    
-     require(HOME_DIR . 'libs/event.class.php');
-    $event = new event;
+
     if(!isset($_REQUEST['id'])) {
         return;
     }
-        $array = $event->get_event_by_id($_REQUEST['id']);
-    $this->tpl->assign('EVENT', $array);
+
+    require(HOME_DIR . 'libs/event.class.php');
+    $event = new event;
+    // handle args errors
+    
+    $array_event_info = $event->get_event_by_id($_REQUEST['id']);
+    $this->tpl->assign('EVENT', $array_event_info);
+    $array_label = $event->get_label($array_event_info['event_id']);
+    $this->tpl->assign('LABEL', $array_label);
 
     }
 
