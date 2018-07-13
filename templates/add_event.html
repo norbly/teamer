@@ -1,10 +1,19 @@
-<h1>add a new event</h1>
+
+
+<h1>{#title_add_event#}</h1>
 <form action="{$SCRIPT_NAME}?action=add_event" method="post">
     <div>
-        <label for="title">title</label><input type="text" name="title" id="title">{$ERROR_TITLE}</br>
+        <label for="title">title</label><input type="text" name="title" id="title">{$ERROR_TITLE}
+    </div>
+    <div>
+        <label for="label">label</label><input type="text" name="input_label" id="input_label">
+        <div id="suggestions_label">
+            {*I need that div*}<div></div>
+        </div>
+        <div id="selected_label"></div>
     </div>
    <div>
-       description: </br><textarea name="description" id="description" cols="30" rows="10"></textarea>{$ERROR_DESCRIPTION}</br>
+       description:<textarea name="description" id="description" cols="30" rows="10"></textarea>{$ERROR_DESCRIPTION}
    </div> 
     <div>
         <input type="checkbox" name="fixed_date" id="fixed_date"checked> <label for="fixed_date">fixes Datum</label>
@@ -36,7 +45,11 @@
     
 </form>
 
+<p id="demo"></p>
+{include file="templates/modules/template_label.html"}
+<script src="templates/main.js"></script>
 <script>
+    var input_label = document.getElementById('input_label');
     var input_fixed_date = document.getElementById('fixed_date');
     var input_start_date = document.getElementById('start_date');
     var input_fixed_location = document.getElementById('fixed_location');
@@ -77,4 +90,29 @@
             input_confirm_reservations.parentNode.style.display = "none";
         }
     })
+
+    input_label.addEventListener("keyup", function() {
+       ajax_request('./ajax.php?action=get_label&lang={$CURRENT_LANG}&q='+input_label.value, displayLabel, document.getElementById("suggestions_label")); 
+    });
+    
+    function displayLabel(xhttp) {
+        var target = document.getElementById("suggestions_label");
+        var temp_target = document.createElement("div");
+        var label = JSON.parse(xhttp.responseText);
+        
+        if (label.error != null) {
+            var entry = document.createElement("div");
+            entry.innerHTML = label.error;
+            temp_target.appendChild(entry);
+        } else {
+            label.forEach(element => {
+                var entry = document.createElement("div");
+                entry.innerHTML = element['translation'];
+                temp_target.appendChild(entry);
+            });
+        }
+        target.replaceChild(temp_target, target.firstChild);
+    }
+
+    // addLabel(this)
 </script>

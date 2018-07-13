@@ -37,6 +37,20 @@ CREATE TABLE label (
     label_name VARCHAR(64) NOT NULL
 );
 
+DROP TABLE IF EXISTS languages;
+CREATE TABLE languages (
+    lang_iso_code VARCHAR(2) PRIMARY KEY,
+    native_lang_title VARCHAR(32)
+);
+
+    DROP TABLE IF EXISTS label_in_lang;
+CREATE TABLE label_in_lang (
+    lang_iso_code VARCHAR(2) REFERENCES languages(lang_iso_code),
+    label_id INT REFERENCES label(label_id),
+    translation VARCHAR(64),
+    CONSTRAINT label_in_lang_PK PRIMARY KEY (label_id, lang_iso_code)
+);
+
 DROP TABLE IF EXISTS event_has_label;
 CREATE TABLE event_has_label (
     label_id INT REFERENCES events(event_id), 
@@ -88,11 +102,45 @@ INSERT INTO events (creator_id, event_title, event_description, creation_date, c
                     advance_reservation_required, confirm_reservations)
                    VALUES (3, "132 dolore magna ", "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. ",
                     "2018-07-01", "14:45:00","2018-07-09", "17:25:00", 0,1,12,1,0);     
+INSERT INTO languages (lang_iso_code, native_lang_title) VALUES ('en', 'english');
+INSERT INTO languages (lang_iso_code, native_lang_title) VALUES ('de', 'deutsch');
 
+
+#0
 INSERT INTO label (label_name) VALUES ('tag_outdoor');
 INSERT INTO label (label_name) VALUES ('tag_sport');
 INSERT INTO label (label_name) VALUES ('tag_hiking');
-INSERT INTO label (label_name) VALUES ('tag_music'); 
+INSERT INTO label (label_name) VALUES ('tag_music');
+INSERT INTO label (label_name) VALUES ('tag_indoor');
+#5
+INSERT INTO label (label_name) VALUES ('tag_learning');
+INSERT INTO label (label_name) VALUES ('tag_nature');
+INSERT INTO label (label_name) VALUES ('tag_computer');
+INSERT INTO label (label_name) VALUES ('tag_beach');
+INSERT INTO label (label_name) VALUES ('tag_internet');  
+#10
+INSERT INTO label (label_name) VALUES ('tag_creative');
+INSERT INTO label (label_name) VALUES ('tag_challenge');
+INSERT INTO label (label_name) VALUES ('tag_martial_arts');
+INSERT INTO label (label_name) VALUES ('tag_travel');
+INSERT INTO label (label_name) VALUES ('tag_esoterism');
+#15
+
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',1,'outdoor');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',2,'sport');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',3,'hiking');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',4,'music');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',5,'indoor');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',6,'learning');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',7,'nature');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',8,'computer');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',9,'beach');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',10,'internet');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',11,'creative');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',12,'challenge');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',13,'martial arts');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',14,'travel');
+INSERT INTO label_in_lang (lang_iso_code, label_id, translation) VALUES ('en',15,'esoterism');
 
 INSERT INTO event_has_label (label_id, event_id) VALUES (1,1);
 INSERT INTO event_has_label (label_id, event_id) VALUES (2,1);

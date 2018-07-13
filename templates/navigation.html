@@ -1,13 +1,16 @@
 <ul>
-    <li><a href="{$SCRIPT_NAME}?action=index">index</a></li>
-    <li><a href="{$SCRIPT_NAME}?action=add_event">add event</a></li>
-    <li><a href="{$SCRIPT_NAME}?action=search">search</a></li>
+    <li><a href="{$SCRIPT_NAME}?action=index&lang={$CURRENT_LANG}">index</a></li>
+    <li><a href="{$SCRIPT_NAME}?action=add_event&lang={$CURRENT_LANG}">add event</a></li>
+    <li><a href="{$SCRIPT_NAME}?action=search&lang={$CURRENT_LANG}">search</a></li>
    {if $smarty.session.active == true}
-   <li><a href="{$SCRIPT_NAME}?action=dashboard">dashboard</a></li>
+   <li><a href="{$SCRIPT_NAME}?action=dashboard&lang={$CURRENT_LANG}">dashboard</a></li>
     username: {$smarty.session.username}
-    <li><a href="{$SCRIPT_NAME}?action=logout">log out</a></li>
+    <li><a href="{$SCRIPT_NAME}?action=logout&lang={$CURRENT_LANG}">log out</a></li>
     {else}
-    <li><a href="{$SCRIPT_NAME}?action=register">register</a></li>
-    <li><a href="{$SCRIPT_NAME}?action=login">log in</a></li>
+    <li><a href="{$SCRIPT_NAME}?action=register&lang={$CURRENT_LANG}">register</a></li>
+    <li><a href="{$SCRIPT_NAME}?action=login&lang={$CURRENT_LANG}">log in</a></li>
     {/if}
+    <div>languages</div>
+    <div><a href="{$SCRIPT_NAME}?action={$CURRENT_ACTION}&lang=de">de</a></div>
+    <div><a href="{$SCRIPT_NAME}?action={$CURRENT_ACTION}&lang=en">en</a></div>
 </ul>

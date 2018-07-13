@@ -9,16 +9,21 @@ class Main {
         
         $this->tpl = new Custom_Smarty; 
         $this->conn = new Connection;
-    
-       if ($this->conn->connect_error) {
-            echo 'connection error:' . $this->conn->connect_error . '<br>';
+        
+        // get the users language
+        if (isset($_REQUEST['lang'])) {
+            $this->tpl->assign('CURRENT_LANG', $_REQUEST['lang']);
+        } else {
+            // what happens when the user did not specify any language
+            $this->tpl->assign('CURRENT_LANG', 'en');
         }
 
     }
 
     function load_doc($action) {
         $this->tpl->assign('PAGE_TITLE',$this->page_title);
-        $this->tpl->assign('TEMPLATE',$action);  
+        $this->tpl->assign('CURRENT_ACTION',$action);
+        $this->tpl->assign('TEMPLATE',$action . '.html');  
         $this->tpl->display('main.html');
     }
   
@@ -145,7 +150,7 @@ class Main {
     function add_event($input = array()) {
         $this->page_title = 'teamer - add event';
         // check if user has submitted the form
-        
+        $this->tpl->assign('LABEL',$this->conn->get_all_label());
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
             // check if user is logged in
@@ -156,6 +161,7 @@ class Main {
             
             require(HOME_DIR . 'libs/event.class.php');
             $event = new event;
+            
 
             $event->creator_id = $_SESSION['user_id'];
             // check if title is empty

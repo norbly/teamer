@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32, created on 2018-07-05 16:56:13
+/* Smarty version 3.1.32, created on 2018-07-12 09:53:07
   from '/var/www/html/teamer/templates/dashboard.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32',
-  'unifunc' => 'content_5b3e318deff834_74475370',
+  'unifunc' => 'content_5b4708e3df3ad8_33965005',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '99e1c69e0c5bfc87a393ba73b46099c7e00cff73' => 
     array (
       0 => '/var/www/html/teamer/templates/dashboard.html',
-      1 => 1530802571,
+      1 => 1531381986,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b3e318deff834_74475370 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b4708e3df3ad8_33965005 (Smarty_Internal_Template $_smarty_tpl) {
 echo $_GET['message'];?>
 
 welcome back <?php echo $_SESSION['username'];?>
@@ -44,7 +44,7 @@ id: <?php echo $_SESSION['user_id'];?>
 </template>
 
 <?php echo '<script'; ?>
- src="./templates/ajax.js"><?php echo '</script'; ?>
+ src="./templates/main.js"><?php echo '</script'; ?>
 >
 
 <?php echo '<script'; ?>
