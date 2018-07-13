@@ -15,6 +15,11 @@ switch ($action) {
     $ajaxobject->own_events($_REQUEST);
     break;
 
+    case 'get_label' :
+    
+    $ajaxobject->get_label($_REQUEST);
+    break;
+
     default:
     
     break;
