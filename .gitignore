@@ -1,4 +1,5 @@
 *.html.php
 *.file.*.html.php
 *.php.php
-templates_c/*
+'var/www/html/teamer/templates_c/'
+/templates_c/

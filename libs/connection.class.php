@@ -1,13 +1,28 @@
 <?php
 class Connection extends mysqli {
+    
     // Database Connection Settings
-    var $servername = "localhost";
-    var $username = "root";
-    var $password = "passwort";
-    var $database = "teamerdb";
-
+    var $servername;
+    var $username;
+    var $password;
+    var $database;
+ 
      public function __construct() {
-         parent::__construct($this->servername, $this->username, $this->password, $this->database);
+        $pref_file = fopen(HOME_DIR . "preferences.json","r");
+        $str = fread($pref_file, filesize(HOME_DIR . "preferences.json"));
+        $pref = json_decode($str);
+        fclose($pref_file);
+
+        $this->servername = $pref->servername;
+        $this->username = $pref->username;
+        $this->password = $pref->password;
+        $this->database = $pref->database;
+
+        parent::__construct($this->servername, $this->username, $this->password, $this->database);
+
+        if($this->connect_error) {
+            die("connection error: " . $this->connect_error);
+        }
      }
 
      function get_all_label() {

@@ -108,10 +108,24 @@
             label.forEach(element => {
                 var entry = document.createElement("div");
                 entry.innerHTML = element['translation'];
+                entry.addEventListener("click", function() {
+                    addLabel(entry, element['label_id']);
+                })
                 temp_target.appendChild(entry);
             });
         }
         target.replaceChild(temp_target, target.firstChild);
+    }
+
+    function addLabel(label, label_id) {
+        
+        var target = document.getElementById("selected_label");
+        var template = document.getElementById("template_label");
+        var clon = template.content.cloneNode(true);
+        var box_label_childs =  clon.querySelectorAll(".box_label")[0].childNodes;
+        box_label_childs[0].innerHTML = label.innerHTML;
+        clon.querySelectorAll(".box_label")[0].lastChild.value = 3;
+        target.appendChild(clon);
     }
 
     // addLabel(this)

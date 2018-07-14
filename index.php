@@ -1,7 +1,14 @@
 <?php
 session_start();
 
-define('HOME_DIR', '/var/www/html/teamer/');
+define('PREF_FILE', "preferences.json");
+
+$pref_file = fopen(PREF_FILE,"r");
+$str = fread($pref_file, filesize(PREF_FILE));
+$pref = json_decode($str);
+fclose($pref_file);
+
+define('HOME_DIR', $pref->home_dir);
 require(HOME_DIR .'libs/setup.php');
 
 $m = new Main;
