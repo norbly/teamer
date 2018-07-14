@@ -6,9 +6,9 @@
         <label for="title">title</label><input type="text" name="title" id="title">{$ERROR_TITLE}
     </div>
     <div>
-        <label for="label">label</label><input type="text" name="input_label" id="input_label">
+        <label for="label">label</label><input type="text" name="input_label" id="input_label" autocomplete="off">
         <div id="suggestions_label">
-            {*I need that div*}<div></div>
+            {*div is used by js*}<div></div>
         </div>
         <div id="selected_label"></div>
     </div>
@@ -45,7 +45,6 @@
     
 </form>
 
-<p id="demo"></p>
 {include file="templates/modules/template_label.html"}
 <script src="templates/main.js"></script>
 <script>
@@ -58,6 +57,8 @@
     var input_max_number_of_participants = document.getElementById('max_number_of_participants');
     var input_advance_reservation_required = document.getElementById('advance_reservation_required');
     var input_confirm_reservations = document.getElementById('confirm_reservations');
+
+    var array_selected_label = []; 
 
     input_fixed_date.addEventListener('click', function() {
         if (input_fixed_date.checked) {
@@ -118,12 +119,15 @@
     }
 
     function addLabel(label, label_id) {
-        
+        array_selected_label.push(label.innerHTML);
         var target = document.getElementById("selected_label");
         var template = document.getElementById("template_label");
         var clon = template.content.cloneNode(true);
         var box_label_childs =  clon.querySelectorAll(".box_label")[0].childNodes;
         box_label_childs[0].innerHTML = label.innerHTML;
+        box_label_childs[1].addEventListener("click", function() {
+            this.parentNode.parentNode.removeChild(this.parentNode);
+        });
         clon.querySelectorAll(".box_label")[0].lastChild.value = 3;
         target.appendChild(clon);
     }
