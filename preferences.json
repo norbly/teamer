@@ -1,7 +1,0 @@
-{
-    "home_dir" : "/var/www/html/teamer/",
-    "servername" : "localhost",
-    "username" : "root",
-    "password" : "passwort",
-    "database" : "teamerdb" 
-}

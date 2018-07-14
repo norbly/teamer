@@ -1,5 +1,2 @@
-*.html.php
-*.file.*.html.php
-*.php.php
-'var/www/html/teamer/templates_c/'
 /templates_c/*
+preferences.json
