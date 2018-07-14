@@ -7,11 +7,12 @@ Die Datei `preferences.json` mit folgendem Inhalt erstellen:
 {
     "home_dir" : "/var/www/html/teamer/",
     "servername" : "localhost",
-    "username" : "root",
-    "password" : "passwort",
-    "database" : "teamerdb" 
+    "username" : "your_username",
+    "password" : "your_password",
+    "database" : "your_database" 
 }
 ```
+die soeben erstellte Datei anpassen.
 #### Der home Ordner braucht Schreibrechte.
 ```linux
 cd /var/www/html
