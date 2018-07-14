@@ -19,6 +19,12 @@ cd /var/www/html
 sudo chmod -R 777 teamer
 ```  
 #### Datenbank
-neue mySQL Datenbank in phpMyAdmin erstellen (Name z.B. teamerdb). 
-Dazu phpMyAdmin im Browser unter localhost/phpmyadmin bzw 192.168.178.81/phpmyadmin öffnen (wenn 192.168.178.81 deine IP Adresse ist). PhpMyAdmin installieren mit `sudo apt-get install phpmyadmin`.
+neue mySQL Datenbank (Name z.B. teamerdb) mit zB phpMyAdmin erstellen. 
 
+## hints
+#### wenn .gitignore keine Daten ignoriert
+```
+git rm -r --cached .
+git add .
+git commit -m ".gitignore is now working"
+```
