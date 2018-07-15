@@ -4,6 +4,14 @@
     <div>
         <input type="text" name="q" id="q">
     </div>
+    <div>
+            <label for="suggestions">label</label><input type="text" name="input_label" id="input_label" autocomplete="off">
+            <div id="suggestions_label">
+            </div>
+            <div id="selected_labels">
+                <input type="text" name="lbl_q" id="lbl_q" style="display:none">
+            </div>
+        </div>
     <input type="submit" value="search">
 </form>
 
@@ -11,6 +19,8 @@
     <div id="box_events"></div>
     <button id="more">more</button>
 </div>
+
+
 
 <template> 
     <a>  
@@ -20,10 +30,12 @@
     <hr>   
 </template>
 
+{include file="templates/modules/template_label.html"}
+
 <script src="./templates/main.js"></script>
 
 <script>
-    
+    var input_label = document.getElementById('input_label');
     
     var offset = 0;
     // event listeners
@@ -52,5 +64,14 @@
         });  
     }
 
+input_label.addEventListener("keyup", function() {
+       var label_arguments = {
+            lang : getQueryParams(document.location.search).lang,
+            input_elem : document.getElementById("input_label"),
+            div_suggestions : document.getElementById("suggestions_label"),
+            div_selected : document.getElementById("selected_labels")
+        } 
+       requestLabelSuggestions(label_arguments);
+    });
     
 </script>

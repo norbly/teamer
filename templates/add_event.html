@@ -9,7 +9,9 @@
         <label for="suggestions">label</label><input type="text" name="input_label" id="input_label" autocomplete="off">
         <div id="suggestions_label">
         </div>
-        <div id="selected_label"></div>
+        <div id="selected_labels">
+            <input type="text" name="lbl_q" id="lbl_q" style="display:none">
+        </div>
     </div>
    <div>
        description:<textarea name="description" id="description" cols="30" rows="10"></textarea>{$ERROR_DESCRIPTION}
@@ -60,7 +62,7 @@
     var input_advance_reservation_required = document.getElementById('advance_reservation_required');
     var input_confirm_reservations = document.getElementById('confirm_reservations');
 
-    var array_selected_label = []; 
+    
 
     input_fixed_date.addEventListener('click', function() {
         if (input_fixed_date.checked) {
@@ -95,61 +97,13 @@
     })
 
     input_label.addEventListener("keyup", function() {
-       requestSuggestions();
+       var label_arguments = {
+            lang : getQueryParams(document.location.search).lang,
+            input_elem : document.getElementById("input_label"),
+            div_suggestions : document.getElementById("suggestions_label"),
+            div_selected : document.getElementById("selected_labels")
+        } 
+       requestLabelSuggestions(label_arguments);
     });
     
-    function requestSuggestions() {
-        var exclude = JSON.stringify(array_selected_label);
-        ajax_request('./ajax.php?action=get_label&lang={$CURRENT_LANG}&q=' + input_label.value + '&exclude=' + exclude, displayLabel); 
-    }
-
-    function displayLabel(xhttp) {
-        
-        var div_suggestions_label = document.getElementById("suggestions_label");
-        var temp_div = document.createElement("div");
-        var suggestions = JSON.parse(xhttp.responseText);
-        var entry;
-        
-        if (suggestions.error != null) {
-            entry = document.createElement("div");
-            entry.innerHTML = suggestions.error;
-            temp_div.appendChild(entry);
-        } else {
-            suggestions.forEach(element => {
-                var translation = element['translation'];
-                entry = document.createElement("div");
-                entry.innerHTML = translation;
-                entry.addEventListener("click", function() {                   
-                    selectLabel(translation, element['label_id']);
-                    requestSuggestions();
-                })
-                temp_div.appendChild(entry);
-            });
-        }
-        div_suggestions_label.replaceChild(temp_div, div_suggestions_label.firstChild);
-    }
-
-    function selectLabel(translation, label_id) {
-        array_selected_label.push(label_id);
-        var div_suggestions_label = document.getElementById("selected_label");
-        var template = document.getElementById("template_label");
-        var clon = template.content.cloneNode(true);
-
-        
-        clon.querySelectorAll("span")[0].innerHTML = translation;
-        clon.querySelectorAll("span")[1].addEventListener("click", function() {
-            removeSelectedLabel(this,label_id);
-        });
-        clon.querySelectorAll("input")[0].value = 3;
-        div_suggestions_label.appendChild(clon);
-    }
-
-    function removeSelectedLabel(node,label_id) {
-        node.parentNode.parentNode.removeChild(node.parentNode);
-        var index = array_selected_label.indexOf(label_id);
-        array_selected_label.splice(index,1);
-        requestSuggestions();
-    }
-
-    // selectLabel(this)
 </script>

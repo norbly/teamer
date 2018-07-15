@@ -3,10 +3,8 @@ class Main {
     
     var $tpl = null;
     var $conn;
-    var $page_title = 'teamer';
 
     function __construct() {
-        
         $this->tpl = new Custom_Smarty; 
         $this->conn = new Connection;
         
@@ -21,15 +19,12 @@ class Main {
     }
 
     function load_doc($action) {
-        $this->tpl->assign('PAGE_TITLE',$this->page_title);
         $this->tpl->assign('CURRENT_ACTION',$action);
         $this->tpl->assign('TEMPLATE',$action . '.html');  
         $this->tpl->display('main.html');
     }
   
     function register($input = array()) {
-        
-        $this->page_title = 'teamer - create account';
 
         if (isset($_POST['username']) || isset($_POST['email']) || isset($_POST['passwort_0']) || isset($_POST['passwort_1'])) {
             $error = false;
@@ -97,14 +92,13 @@ class Main {
     }
 
     function login($input = array()) {
-        $this->page_title = 'teamer - login';
         $error = false;
         if (isset($_POST['email']) || isset($_POST['password'])) {
             $email = $this->conn->escape_string($input['email']);
 
             // check if email is empty
             if (empty($email)) {
-                $this->tpl->assign('ERROR_LOGIN', 'err_email_empty'); 
+                $this->tpl->assign('ERROR_EMAIL', 'err_email_empty'); 
                 return;               
             }
             
@@ -113,7 +107,7 @@ class Main {
             $result = $this->conn->query($sql);
         
             if ($result->num_rows === 0) {
-                $this->tpl->assign('ERROR_LOGIN', 'err_user_not_exists');
+                $this->tpl->assign('ERROR_EMAIL', 'err_user_not_exists');
                 return;
             } 
             
@@ -127,7 +121,7 @@ class Main {
                 $_SESSION['email'] = $user['email'];
                 header("location: " . $_SERVER['PHP_SELF'] . "?action=dashboard");
             } else {
-                $this->tpl->assign('ERROR_LOGIN', 'err_wrong_password');
+                $this->tpl->assign('ERROR_PASSWORD', 'err_wrong_password');
                 return;
             }           
         }   
@@ -144,11 +138,9 @@ class Main {
          if (!isset($_SESSION['active']) OR $_SESSION['active'] === false) { 
             header("location: " . $_SERVER['PHP_SELF'] . "?action=login&error=err_login_to_view_page");
          }
-        $this->page_title = 'teamer - dashboard ';
     }
 
     function add_event($input = array()) {
-        $this->page_title = 'teamer - add event';
         // check if user has submitted the form
         $this->tpl->assign('LABEL',$this->conn->get_all_label());
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -200,7 +192,6 @@ class Main {
     }
 
    function show_event() {
-    $this->page_title = 'teamer - event';
 
     if(!isset($_REQUEST['id'])) {
         return;

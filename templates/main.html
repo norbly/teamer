@@ -1,8 +1,11 @@
+{config_load file="templates/languages/$CURRENT_LANG/lang.config" section="$CURRENT_ACTION" scope="global"}
 <!DOCTYPE html>
 <html>
 {include file='head.html'}
 <body>
 {include file='navigation.html'}
+{$smarty.get.error}  
+{$smarty.get.message}
 {include file=$TEMPLATE}    
 </body>
 </html>
