@@ -20,6 +20,10 @@ switch ($action) {
     $ajaxobject->get_label($_REQUEST);
     break;
 
+    case 'test' : 
+    $ajaxobject->test($_REQUEST);
+    break;
+
     default:
     
     break;
