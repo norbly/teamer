@@ -142,7 +142,7 @@ class Main {
 
     function add_event($input = array()) {
         // check if user has submitted the form
-        $this->tpl->assign('LABEL',$this->conn->get_all_label());
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
             // check if user is logged in
@@ -170,6 +170,11 @@ class Main {
             }
             $event->description = $input['description'];
 
+            // check label
+            $label = $input['label'];
+            $label = json_decode($label);
+            $event->label = $label;
+            
             // check date
             $event->fixed_date = isset($input['fixed_date']) ? 1 : 0;
             $event->start_date = date('Y-m-d', mktime($input['start_date']));

@@ -6,6 +6,7 @@ class event {
     var $creator_id;
     var $title = '';
     var $description = '';
+    var $label;
     var $fixed_date;
     var $start_date;
     var $start_time;
@@ -29,6 +30,26 @@ class event {
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param('issssssiiiii',$this->creator_id, $this->title, $this->description, $current_date, $current_time, $this->start_date, $this->start_time, $this->fixed_location,$this->limited_number_of_participants,$this->max_number_of_participants, $this->advance_reservation_required, $this->confirm_reservations);        
         $stmt->execute();
+
+        // get event id
+        
+        $sql = "SELECT MAX(event_id) FROM events WHERE creator_id = " . $this->creator_id;
+        $result = $this->con->query($sql);
+        $result = $result->fetch_assoc();
+        $this->id = $result[0];
+        
+        // label
+        $i = 0;
+        $l = count($this->label); 
+        $sql_label = "INSERT INTO event_has_label (event_id, label_id) VALUES (?,?)";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param('ii',$this->id, $element);
+        
+        for($i; $i < $l; $i++) {
+            $element = $label[$i];
+            $stmt->execute();
+        }
+        
     }
 
     

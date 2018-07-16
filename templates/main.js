@@ -12,12 +12,14 @@ function ajax_request(url, callback_function, args) {
 
 var array_selected_label = []; 
 
+// functions to call ajax
 function requestLabelSuggestions(args) {
         
     var exclude = JSON.stringify(array_selected_label);
     ajax_request('./ajax.php?action=get_label&lang=' + args.lang + '&q=' + args.input_elem.value + '&exclude=' + exclude,displayLabel, args); 
 }
-
+ 
+// everything about label
 function displayLabel(xhttp, args) {
     var div_suggestions_label = args.div_suggestions;
     var temp_div = document.createElement("div");
@@ -69,7 +71,8 @@ function clearSuggestions(args) {
     args.div_suggestions.replaceChild(document.createElement("div"), args.div_suggestions.firstChild);
     args.input_elem.value = "";
 }
-
+ 
+//general functions
 function getQueryParams(qs) {
     qs = qs.split('+').join(' ');
 
@@ -82,4 +85,18 @@ function getQueryParams(qs) {
     }
 
     return params;
+}
+
+//
+function displayEventBox(xhttp, args) {
+    var events = JSON.parse(xhttp.responseText);
+    var target_div = args.target_div;
+    var template = document.getElementById("template_box_event");
+    events.forEach(element => {
+        var clon = template.content.cloneNode(true);
+        clon.querySelectorAll("a")[0].href = "index.php?action=event&id="+element.event_id;
+        clon.querySelectorAll("h3")[0].innerHTML = element.event_title;
+        clon.getElementById('start_date').innerHTML = element.start_date;
+        target_div.appendChild(clon);
+    });  
 }

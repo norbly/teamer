@@ -20,7 +20,7 @@
     <button id="more">more</button>
 </div>
 
-
+ 
 
 <template> 
     <a>  
@@ -31,22 +31,36 @@
 </template>
 
 {include file="templates/modules/template_label.html"}
+{include file="templates/modules/template_box_event.html"}
 
 <script src="./templates/main.js"></script>
 
 <script>
     var input_label = document.getElementById('input_label');
-    
-    var offset = 0;
+    var label_arguments = {
+            lang : getQueryParams(document.location.search).lang,
+            input_elem : document.getElementById("input_label"),
+            div_suggestions : document.getElementById("suggestions_label"),
+            div_selected : document.getElementById("selected_labels")
+        }
+ 
+    var args_result_events = {
+        "target_div" : document.getElementById("box_events")
+    };
+    var ajax_request_box_event = (function() {
+        var offset = 0;
+        return function() {
+            ajax_request("./ajax.php?action=search_results&offset=" + offset,displayEventBox, args_result_events);
+            offset += 5;
+        };
+    })();
     // event listeners
     window.addEventListener("load", function() {
-        ajax_request("./ajax.php?action=search_results&offset=" + offset,load_events);
-        offset += 5;
+        ajax_request_box_event();
      });
      
     document.getElementById("more").addEventListener("click", function() { 
-        ajax_request("./ajax.php?action=search_results&offset=" + offset,load_events);
-        offset += 5;
+        ajax_request_box_event();
     });
     // callback functions
 
@@ -65,12 +79,7 @@
     }
 
 input_label.addEventListener("keyup", function() {
-       var label_arguments = {
-            lang : getQueryParams(document.location.search).lang,
-            input_elem : document.getElementById("input_label"),
-            div_suggestions : document.getElementById("suggestions_label"),
-            div_selected : document.getElementById("selected_labels")
-        } 
+        
        requestLabelSuggestions(label_arguments);
     });
     

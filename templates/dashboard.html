@@ -7,50 +7,31 @@ id: {$smarty.session.user_id}
     <button id="more">more</button>
 </div>
 
-<template> 
-    <a>
-        <div>
-           <h3></h3>
-            <span id="start_date"></span> 
-        </div>      
-    </a> 
-    <hr>   
-</template>
+{include file='templates/modules/template_box_event.html'}
 
 <script src="./templates/main.js"></script>
 
 <script>
-    var do_ajax_request = (function() {
+    var args_own_events = {
+        "target_div" : document.getElementById("boxes_own_events")
+    };
+    var custom_ajax_request = (function() {
         var offset = 0;
         return function() {
-            ajax_request("./libs/get_own_events.php?user_id={$smarty.session.user_id}&offset=" + offset,load_events);
+            ajax_request("./ajax.php?action=own_events&user_id={$smarty.session.user_id}&offset=" + offset, displayEventBox, args_own_events);
             offset += 5;
         };
     })();
 
     // event listeners
     window.addEventListener("load", function() {
-        do_ajax_request();
+        custom_ajax_request();
     });
      
     document.getElementById("more").addEventListener("click", function() { 
-        do_ajax_request();
+        custom_ajax_request();
     });
-    // callback functions
 
-    // display events in the div boxes_own_event
-    function load_events(xhttp) {
-        var events = JSON.parse(xhttp.responseText);
-        var boxes_own_events = document.getElementById("boxes_own_events");
-        var event_template = document.querySelectorAll("template")[0];
-        events.forEach(element => {
-            var clon = event_template.content.cloneNode(true);
-            clon.querySelectorAll("a")[0].href = "index.php?action=event&id="+element.event_id;
-            clon.querySelectorAll("h3")[0].innerHTML = element.event_title;
-            clon.getElementById('start_date').innerHTML = element.start_date;
-             boxes_own_events.appendChild(clon);
-        });  
-    }
 
     
 </script>

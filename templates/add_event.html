@@ -1,7 +1,7 @@
 
 
 <h1>{#title_add_event#}</h1>
-<form action="{$SCRIPT_NAME}?action=add_event" method="post">
+<form action="{$SCRIPT_NAME}?action=add_event" method="post" id="form_add_event">
     <div>
         <label for="title">title</label><input type="text" name="title" id="title">{$ERROR_TITLE}
     </div>
@@ -10,7 +10,6 @@
         <div id="suggestions_label">
         </div>
         <div id="selected_labels">
-            <input type="text" name="lbl_q" id="lbl_q" style="display:none">
         </div>
     </div>
    <div>
@@ -105,5 +104,14 @@
         } 
        requestLabelSuggestions(label_arguments);
     });
+
+    document.getElementById("form_add_event").addEventListener("submit", function() {
+        input_label.parentElement.removeChild(input_label);
+        var temp = document.createElement("input");
+        temp.name = "label";
+        temp.value = JSON.stringify(array_selected_label);
+        this.insertBefore(this.lastChild, temp);
+    });
+
     
 </script>
