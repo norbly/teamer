@@ -31,22 +31,21 @@ class event {
         $stmt->bind_param('issssssiiiii',$this->creator_id, $this->title, $this->description, $current_date, $current_time, $this->start_date, $this->start_time, $this->fixed_location,$this->limited_number_of_participants,$this->max_number_of_participants, $this->advance_reservation_required, $this->confirm_reservations);        
         $stmt->execute();
 
-        // get event id
-        
-        $sql = "SELECT MAX(event_id) FROM events WHERE creator_id = " . $this->creator_id;
+        // get event id      
+        $sql = "SELECT MAX(event_id) as id FROM events WHERE creator_id = " . $this->creator_id;
         $result = $this->con->query($sql);
         $result = $result->fetch_assoc();
-        $this->id = $result[0];
+        $this->id = $result["id"];
         
         // label
         $i = 0;
         $l = count($this->label); 
         $sql_label = "INSERT INTO event_has_label (event_id, label_id) VALUES (?,?)";
-        $stmt = $this->con->prepare($sql);
+        $stmt = $this->con->prepare($sql_label);
         $stmt->bind_param('ii',$this->id, $element);
         
         for($i; $i < $l; $i++) {
-            $element = $label[$i];
+            $element = $this->label[$i];
             $stmt->execute();
         }
         

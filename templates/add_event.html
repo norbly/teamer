@@ -10,6 +10,7 @@
         <div id="suggestions_label">
         </div>
         <div id="selected_labels">
+            <input type="text" name="label" id="label" style="display:none">
         </div>
     </div>
    <div>
@@ -100,17 +101,15 @@
             lang : getQueryParams(document.location.search).lang,
             input_elem : document.getElementById("input_label"),
             div_suggestions : document.getElementById("suggestions_label"),
-            div_selected : document.getElementById("selected_labels")
+            div_selected : document.getElementById("selected_labels"),
+            
         } 
        requestLabelSuggestions(label_arguments);
     });
 
     document.getElementById("form_add_event").addEventListener("submit", function() {
-        input_label.parentElement.removeChild(input_label);
-        var temp = document.createElement("input");
-        temp.name = "label";
-        temp.value = JSON.stringify(array_selected_label);
-        this.insertBefore(this.lastChild, temp);
+        document.getElementById("label").value = JSON.stringify(array_selected_label);
+        
     });
 
     
