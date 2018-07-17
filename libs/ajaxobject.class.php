@@ -1,4 +1,5 @@
 <?php
+
 include(HOME_DIR . 'libs/connection.class.php');
 class AJAXObject {
 
@@ -10,13 +11,14 @@ class AJAXObject {
     }
 
     function search_results($input = array()) {
-    
-        $offset = $input['offset'];
-        $sql = 'SELECT event_id, event_title, start_date FROM events LIMIT 5 OFFSET '. $offset;
-        $result = $this->con->query($sql);
-        while ($row = $result->fetch_assoc()) {
-            $output[] = $row;
+        include("./libs/search.class.php");
+        if (empty($search)) {
+            $search = new Search;
+            
         }
+      
+        
+        $output = $search->get_search_results($input);
         echo json_encode($output);
     }
 

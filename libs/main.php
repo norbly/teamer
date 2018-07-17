@@ -213,13 +213,9 @@ class Main {
 
     }
 
-    function search() {
-        if (isset($_REQUEST['q'])) {
-            /*
-            include(HOME_DIR . 'libs/search.class.php');
-            $_SESSION['search'] = new Search;
-            $_SESSION['search']->get_search_results();*/
-        }   
+    function search($input) {
+     
+
     }
 }
 ?> 

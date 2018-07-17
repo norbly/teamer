@@ -15,7 +15,7 @@ id: {$smarty.session.user_id}
     var args_own_events = {
         "target_div" : document.getElementById("boxes_own_events")
     };
-    var custom_ajax_request = (function() {
+    var ajax_request_own_events = (function() {
         var offset = 0;
         return function() {
             ajax_request("./ajax.php?action=own_events&user_id={$smarty.session.user_id}&offset=" + offset, displayEventBox, args_own_events);
@@ -25,11 +25,11 @@ id: {$smarty.session.user_id}
 
     // event listeners
     window.addEventListener("load", function() {
-        custom_ajax_request();
+        ajax_request_own_events();
     });
      
     document.getElementById("more").addEventListener("click", function() { 
-        custom_ajax_request();
+        ajax_request_own_events();
     });
 
 

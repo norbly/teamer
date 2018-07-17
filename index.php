@@ -49,7 +49,7 @@ case 'event' :
     $m->load_doc('event');
     break;
 case 'search' :
-    $m->search();
+    $m->search($_REQUEST);
     $m->load_doc('search');
     break;
 default : 

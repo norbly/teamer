@@ -18,6 +18,8 @@ function requestLabelSuggestions(args) {
     var exclude = JSON.stringify(array_selected_label);
     ajax_request('./ajax.php?action=get_label&lang=' + args.lang + '&q=' + args.input_elem.value + '&exclude=' + exclude,displayLabel, args); 
 }
+
+
  
 // everything about label
 function displayLabel(xhttp, args) {
@@ -87,9 +89,25 @@ function getQueryParams(qs) {
     return params;
 }
 
+function setQueryParam(ps) {
+   
+}
 //
 function displayEventBox(xhttp, args) {
     var events = JSON.parse(xhttp.responseText);
+
+    if (events == null) {
+        if(args.target_div.childNodes.length < 1) {
+            var temp_div = document.createElement("div");
+            temp_div.innerHTML = "no_results";
+            args.target_div.appendChild(temp_div);
+        }
+        
+       args.btn_more.parentNode.removeChild(args.btn_more);
+        return;  
+    }
+    
+
     var target_div = args.target_div;
     var template = document.getElementById("template_box_event");
     events.forEach(element => {
@@ -99,4 +117,7 @@ function displayEventBox(xhttp, args) {
         clon.getElementById('start_date').innerHTML = element.start_date;
         target_div.appendChild(clon);
     });  
+    if(args.target_div.childNodes.length > 0) {
+        args.btn_more.style.display = "block";
+    }
 }

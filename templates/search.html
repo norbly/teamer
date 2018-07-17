@@ -1,34 +1,24 @@
 <h1>search</h1>
-<form action="{$SCRIPT_NAME}" method="get">
-    <input type="text" name="action" value="search" style="display:none">
+<form action="{$SCRIPT_NAME}" method="get" id="form_search">
+   <input type="text" name="action" value="search" style="display: none">
     <div>
-        <input type="text" name="q" id="q">
+        <input type="text" name="q" id="q" value="{$smarty.get.q}" placeholder="suche">
     </div>
     <div>
-            <label for="suggestions">label</label><input type="text" name="input_label" id="input_label" autocomplete="off">
-            <div id="suggestions_label">
-            </div>
-            <div id="selected_labels">
-                <input type="text" name="lbl_q" id="lbl_q" style="display:none">
-            </div>
+        <label for="suggestions">label</label><input type="text" name="input_label" id="input_label" autocomplete="off">
+        <div id="suggestions_label">
         </div>
+        <div id="selected_labels">
+            <input type="text" name="label" id="label" style="display:none">
+        </div>
+    </div>
     <input type="submit" value="search">
 </form>
 
 <div id="events" style="width:200px">
     <div id="box_events"></div>
-    <button id="more">more</button>
+    <button id="more" style="display: none">more</button>
 </div>
-
- 
-
-<template> 
-    <a>  
-    <h3></h3>
-    <span id="start_date"></span>
-</a> 
-    <hr>   
-</template>
 
 {include file="templates/modules/template_label.html"}
 {include file="templates/modules/template_box_event.html"}
@@ -36,22 +26,28 @@
 <script src="./templates/main.js"></script>
 
 <script>
+    var q_elem = document.getElementById("q");
+    var btn_more =   document.getElementById("more");
     var input_label = document.getElementById('input_label');
     var label_arguments = {
             lang : getQueryParams(document.location.search).lang,
-            input_elem : document.getElementById("input_label"),
+            input_elem : input_label,
             div_suggestions : document.getElementById("suggestions_label"),
             div_selected : document.getElementById("selected_labels")
         }
  
     var args_result_events = {
-        "target_div" : document.getElementById("box_events")
+        "target_div" : document.getElementById("box_events"),
+        "btn_more" : document.getElementById("more")
     };
+
     var ajax_request_box_event = (function() {
         var offset = 0;
         return function() {
-            ajax_request("./ajax.php?action=search_results&offset=" + offset,displayEventBox, args_result_events);
+            var get = getQueryParams(window.location.search);
+            ajax_request("./ajax.php?action=search_results&offset=" + offset + "&q=" + get['q'],displayEventBox, args_result_events);
             offset += 5;
+            
         };
     })();
     // event listeners
@@ -59,28 +55,17 @@
         ajax_request_box_event();
      });
      
-    document.getElementById("more").addEventListener("click", function() { 
+    btn_more.addEventListener("click", function() { 
         ajax_request_box_event();
     });
-    // callback functions
 
-    // display events in the div boxes_own_event
-    function load_events(xhttp) {
-        var events = JSON.parse(xhttp.responseText);
-        var box_events = document.getElementById("box_events");
-        var event_template = document.querySelectorAll("template")[0];
-        events.forEach(element => {
-            var clon = event_template.content.cloneNode(true);
-            clon.querySelectorAll("a")[0].href = "index.php?action=event&id="+element.event_id;
-            clon.querySelectorAll("h3")[0].innerHTML = element.event_title;
-            clon.getElementById('start_date').innerHTML = element.start_date;
-             box_events.appendChild(clon);
-        });  
-    }
-
-input_label.addEventListener("keyup", function() {
-        
+    input_label.addEventListener("keyup", function() {      
        requestLabelSuggestions(label_arguments);
     });
+
+    document.getElementById("form_add_event").addEventListener("submit", function() {   
+        document.getElementById("label").value = JSON.stringify(array_selected_label);      
+    });
+
     
 </script>
