@@ -1,48 +1,70 @@
-
-
 <h1>{#title_add_event#}</h1>
 <form action="{$SCRIPT_NAME}?action=add_event" method="post" id="form_add_event">
-    <div>
-        <label for="title">title</label><input type="text" name="title" id="title">{$ERROR_TITLE}
-    </div>
-    <div>
-        <label for="suggestions">label</label><input type="text" name="input_label" id="input_label" autocomplete="off">
-        <div id="suggestions_label">
-        </div>
-        <div id="selected_labels">
-            <input type="text" name="label" id="label" style="display:none">
-        </div>
-    </div>
-   <div>
-       description:<textarea name="description" id="description" cols="30" rows="10"></textarea>{$ERROR_DESCRIPTION}
-   </div> 
-    <div>
-        <input type="checkbox" name="fixed_date" id="fixed_date"checked> <label for="fixed_date">fixes Datum</label>
-    </div>
-    <div>
-        <input type="date" name="start_date" id="start_date">
-        <input type="time" name="start_time" id="">
-    </div>
-    <div>
-        <input type="checkbox" name="fixed_location" id="fixed_location" checked>fixer Ort
-        
-    </div>  
-    <div>
-        Ort: <input type="text" name="location" id="location">
-    </div>
-    <div>
-        <input type="checkbox" name="limited_number_of_participants" id="limited_number_of_participants" checked>begrenzte Teilnehmeranzahl
-    </div>
-    <div>
-        number_of_participants:<input type="number" name="max_number_of_participants" id="max_number_of_participants">
-    </div>
-    <div>
-        <input type="checkbox" name="advance_reservation_required" id="advance_reservation_required" checked>advance_reservation_required
-    </div>
-    <div>
-        <input type="checkbox" name="confirm_reservations" id="confirm_reservations" >confirm_reservations
-    </div>
-    <input type="submit" value="create event"> 
+
+
+	<div class="row">
+		<div class="col-12 col-sm-6 form-group">
+			<label for="title">Title:</label> 
+			<input class="form-control" type="text" name="title" id="title">{$ERROR_TITLE}
+		</div>
+		<div class="col-12 col-sm-6 form-group">
+			<label for="suggestions">Labels:</label> 
+			<input class="form-control" type="text" name="input_label" id="input_label" autocomplete="off">
+			<div id="suggestions_label"> </div>
+			<div id="selected_labels">
+				<input type="text" name="label" id="label" style="display:none">
+			</div>
+		</div>
+	</div>
+
+   <div class="form-group">
+		<label for="description">Description:</label>
+		<textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>{$ERROR_DESCRIPTION}
+   </div>
+
+	<div class="row">	
+		<div class="col-12 col-sm-6 col-md-4">
+			<div class="custom-control custom-checkbox">
+				<input type="checkbox" class="custom-control-input" name="fixed_date" id="fixed_date" checked> 
+				<label class="custom-control-label" for="fixed_date">Fixes Datum</label>
+			</div>
+			<div>
+				<input type="date" name="start_date" id="start_date">
+				<input type="time" name="start_time" id="">
+			</div>
+		</div>
+		<div class="col-12 col-sm-6 col-md-4">
+			<div class="custom-control custom-checkbox">
+				<input class="custom-control-input" type="checkbox" name="fixed_location" id="fixed_location" checked>
+				<label class="custom-control-label" for="fixed_location">Fixer Ort</label>
+			</div>
+			<div class="form-group">
+			   <input class="form-control" type="text" name="location" id="location">
+			</div>
+		</div>
+		<div class="col-12 col-sm-6 col-md-4">
+			<div class="custom-control custom-checkbox">
+				<input class="custom-control-input" type="checkbox" name="limited_number_of_participants" id="limited_number_of_participants" checked>
+				<label class="custom-control-label" for="participants">Begrenzte Teilnehmeranzahl</label>
+			</div>
+			<div>
+				<input class="form-control" type="number" name="max_number_of_participants" id="max_number_of_participants">
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="custom-control custom-checkbox col-12 col-sm-6">
+			<input class="custom-control-input" type="checkbox" name="advance_reservation_required" id="advance_reservation_required" checked>
+			<label class="custom-control-label" for="advance_reservation_required">Reservation in advance required</label>
+		</div>
+		<div class="custom-control custom-checkbox col-12 col-sm-6">
+			<input class="custom-control-input" type="checkbox" name="confirm_reservations" id="confirm_reservations">
+			<label class="custom-control-label" for="confirm_reservations">Confirm reservations</label>
+		</div>
+	</div>
+	
+    <input class="btn btn-primary" type="submit" value="Create event"> 
     
 </form>
 
