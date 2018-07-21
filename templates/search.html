@@ -1,23 +1,26 @@
 <h1>search</h1>
-<form action="{$SCRIPT_NAME}" method="get" id="form_search">
-   <input type="text" name="action" value="search" style="display: none">
+
+
+<form action="{$SCRIPT_NAME}" method="get" id="form_search">	
+	<div class="form-group">
+		<input type="text" name="action" value="search" style="display: none">
+		<input class="form-control" type="text" name="q" id="q" value="{$smarty.get.q}" placeholder="Suche">
+	</div>
     <div class="form-group">
-        <input type="text" name="q" id="q" value="{$smarty.get.q}" placeholder="suche">
-    </div>
-    <div>
-        <label for="suggestions">label</label><input type="text" name="input_label" id="input_label" autocomplete="off">
+        <label for="suggestions">Labels:</label>
+		<input class="form-control" type="text" name="input_label" id="input_label" autocomplete="off">
         <div id="suggestions_label">
         </div>
         <div id="selected_labels">
             <input type="text" name="label" id="label" style="display:none">
         </div>
     </div>
-    <input type="submit" value="search">
+    <input class="btn btn-primary" type="submit" value="search">
 </form>
 
 <div id="events" style="width:200px">
     <div id="box_events"></div>
-    <button id="more" style="display: none">more</button>
+    <button class="btn" id="more" style="display: none">more</button>
 </div>
 
 {include file="templates/modules/template_label.html"}

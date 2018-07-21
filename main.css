@@ -1,0 +1,23 @@
+/* prevent autozoom on iOS devices*/
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+	select,
+    textarea,
+    input {
+      font-size: 16px;
+    }
+  }
+
+
+li.nav-item {
+	padding: 0 10px;
+}
+
+.content {
+	padding: 0 10px;
+}
+
+@media screen and (min-width: 800px) {
+	.content {
+		max-width: 75%;
+	}
+}

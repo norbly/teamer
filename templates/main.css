@@ -7,10 +7,37 @@
     }
   }
 
+
 li.nav-item {
 	padding: 0 10px;
 }
 
 .content {
 	padding: 0 10px;
+	margin: auto;
+}
+
+.event_inf_icon {
+	transform: translate(0,5px);
+}
+
+.cross:hover {
+	cursor: pointer;
+}
+
+.box_label {
+	margin: 70px;
+}
+	
+
+@media screen and (min-width: 1000px) {
+	.content {
+		width: 75%;
+	}
+}
+
+@media screen and (min-width: 1300px) {
+	.content {
+		width: 50%;
+	}
 }

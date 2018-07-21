@@ -4,17 +4,24 @@
 {/if}
 
 <h2>{$EVENT.event_title}</h2>
-<div>erstellt von einem user mit id = {$EVENT.creator_id}</div>
-<div>Beginn: {$EVENT.start_date} {$EVENT.start_time}</div>
-<div>Beschreibung: {$EVENT.event_description}</div>
+<p>Erstellt von einem User mit der ID {$EVENT.creator_id}</p>
+<hr>
+
+<p>{$EVENT.event_description}</p>
+
+<p><i class="material-icons event_inf_icon" style="transform: translate(0,5px);">event</i> {$EVENT.start_date} {$EVENT.start_time}</p>
+
+
 {if $EVENT.advance_reservation_required == true}
 <a href="">anmelden</a>
+
 {if $EVENT.confirm_reservations == true}
 <div>Anmeldungen müssen erst akzeptiert werden</div> 
 {/if}
 {else}
 <div>Anmeldung nicht erforderlich</div>
 {/if}
+
 {if $EVENT.limited_number_of_participants == true}
 <div>Teilnehmer:  von {$EVENT.max_number_of_participants}</div>
 {else}
@@ -22,7 +29,7 @@
 {/if}
 
 {foreach from=$LABEL key=key item=label}
-<div>{$label.label_name}</div>
+<span class="label border">{$label.label_name}</span>
 {/foreach}
 
 
