@@ -1,4 +1,4 @@
-/* prevent autozoom on iOS devices*/
+/*prevent autozoom on iOS devices*/
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	select,
     textarea,
@@ -17,18 +17,23 @@ li.nav-item {
 	margin: auto;
 }
 
+
+/*event.html*/
 .event_inf_icon {
 	transform: translate(0,5px);
 }
 
+/*template_label.html*/
 .cross:hover {
 	cursor: pointer;
 }
 
-.box_label {
-	margin: 70px;
+.tag {
+	display: inline-block;
+	margin: 1px;
+	padding: 1px;
+	border-radius: 5px;
 }
-	
 
 @media screen and (min-width: 1000px) {
 	.content {
