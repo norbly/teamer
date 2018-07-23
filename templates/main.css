@@ -18,7 +18,11 @@ li.nav-item {
 }
 
 
-/*event.html*/
+/*event.html*/ 
+.event_inf {
+	margin-top: 0px;
+}
+
 .event_inf_icon {
 	transform: translate(0,5px);
 }
@@ -30,9 +34,16 @@ li.nav-item {
 
 .tag {
 	display: inline-block;
-	margin: 1px;
-	padding: 1px;
+	padding: 5px;
 	border-radius: 5px;
+}
+
+.box_label {
+	margin: 10px 0 0 10px;
+}
+
+.mx-auto {
+	margin: auto;
 }
 
 @media screen and (min-width: 1000px) {

@@ -10,30 +10,28 @@
 <p>{$EVENT.event_description}</p>
 
 {foreach from=$LABEL key=key item=label}
-<span class="border text-primary" style="padding:5px; border-radius:5px;">{$label.label_name}</span>
+<span class="border text-primary tag">{$label.label_name}</span>
 {/foreach}
 
 <br>
 
 <p><i class="material-icons event_inf_icon">event</i> {$EVENT.start_date} {$EVENT.start_time}</p>
 
+{if $EVENT.limited_number_of_participants == true}
+<p class="event_inf"><i class="material-icons event_inf_icon">accessibility_new</i>Teilnehmerbegrenzung von {$EVENT.max_number_of_participants}</p>
+{else}
+<p class="event_inf"><i class="material-icons event_inf_icon">accessibility_new</i>keine Teilnehmerbegrenzung </p>
+{/if}
+
 
 {if $EVENT.advance_reservation_required == true}
-<a href="">anmelden</a>
+<button type="submit" class="btn btn-primary" disabled>Anmelden</button>
 
 {if $EVENT.confirm_reservations == true}
 <div>Anmeldungen müssen erst akzeptiert werden</div> 
 {/if}
 {else}
-<div>Anmeldung nicht erforderlich</div>
+<button type="submit" class="btn btn-primary" disabled>Anmeldung nicht erforderlich</button>
 {/if}
-
-{if $EVENT.limited_number_of_participants == true}
-<div>Teilnehmer:  von {$EVENT.max_number_of_participants}</div>
-{else}
-<div>keine Teilnehmerbegrenzung </div>
-{/if}
-
-
 
 
